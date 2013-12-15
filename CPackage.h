@@ -1,6 +1,13 @@
 #ifndef CPACKAGE_H
 #define CPACKAGE_H
 
+#if defined(unix)
+#define PUREPACKAGE "CXInstall"
+#elif defined(_WIN32)
+#define PUREPACKAGE "CXInstall.exe"
+#else
+#define PUREPACKAGE "CXInstall"
+#endif
 
 #include "CXinclude.h"
 #include <vector>
@@ -40,10 +47,12 @@ class CPackage
 
   std::vector<std::string> CX_GetAllFileInDirectoryName(std::string dirname);
  private:
-  CX_Dir_File dir_file;
+  CX_Dir_File m_dir_file;
   std::ofstream m_package;
   std::ifstream m_srcfile;
-  CX_UINT32 default_dk_property,default_fk_prorerty,default_fk_compresstype;
+  CX_UINT32 m_default_dk_property,m_default_fk_prorerty,m_default_fk_compresstype;
+  CX_UINT64 m_databegpos,m_totaldatalen;
+  
 };
 
 
